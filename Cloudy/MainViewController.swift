@@ -30,6 +30,8 @@ class MainViewController: NSViewController, NSDraggingDestination {
          keysWillChange(keys: watchedKeys)
          CGiCloudKVStore.syncFromCloud(keys: watchedKeys)
          keysDidChange(keys: watchedKeys)
+        
+        updateImageWell()
          
          CGiCloud.iCloudSyncEnabled = newValue
       }
