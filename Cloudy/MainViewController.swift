@@ -74,12 +74,14 @@ class MainViewController: NSViewController, NSDraggingDestination {
    }
    
    @objc func ubiquitousKeyStoreDidChange(notification: Notification) {
-      if let ubiquitousKVUserInfo = notification.userInfo,
-         let changedKeys = ubiquitousKVUserInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as! [String]? {
-         
-         keysWillChange(keys: changedKeys)
-         CGiCloudKVStore.syncFromCloud(keys: changedKeys)
-         keysDidChange(keys: changedKeys)
+      if iCloudSyncEnabled {
+         if let ubiquitousKVUserInfo = notification.userInfo,
+            let changedKeys = ubiquitousKVUserInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as! [String]? {
+            
+            keysWillChange(keys: changedKeys)
+            CGiCloudKVStore.syncFromCloud(keys: changedKeys)
+            keysDidChange(keys: changedKeys)
+         }
       }
    }
    
